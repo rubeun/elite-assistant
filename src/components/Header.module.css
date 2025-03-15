@@ -5,4 +5,31 @@
   justify-content: center;
   font-size: calc(6px + 2vmin);
   padding: 20px 0;
+  & h1 {
+    color: var(--hud-text);
+  }
+  & h4 {
+    color: var(--hud-text);
+  }
+}
+
+.eliteLogo {
+  height: 20vmin;
+  pointer-events: none;
+  padding-top: 3rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .eliteLogo {
+    animation: elite-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes elite-logo-spin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
 }
