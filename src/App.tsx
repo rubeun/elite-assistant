@@ -1,23 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import elitelogo from './logo-elite1.svg';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [isLightMode, setIsLightMode] = useState<boolean>(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className={`container ${isLightMode ? 'lightMode' : ''}`}>
+      <header>
+        <h1>Elite Assistant</h1>
+        <h4>Coming Soon</h4>
+        <img src={elitelogo} className='eliteLogo' alt='Elite Logo' />
       </header>
     </div>
   );

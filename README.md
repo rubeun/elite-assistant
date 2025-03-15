@@ -1,10 +1,11 @@
-# Elite Dangerous Assistant
+# Elite Dangerous Assistant 2025
 This App is a WIP assistant for players of [Elite Dangerous](https://www.elitedangerous.com/) 
+
 App deployed online: [https://rubeun.github.io/elite-assistant](https://rubeun.github.io/elite-assistant)
 
 
 ## Current Features
-- Colonisation Materials Tracker
+- Colonisation Materials Tracker (WIP)
 
 
 ## Planned Features
