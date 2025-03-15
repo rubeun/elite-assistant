@@ -3,7 +3,7 @@
   --background: black;
   --popup-text: black;
   --popup-background: white;
-  --hud-text: #ff7002;
+  --hud-text: #fe7023;
   --box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
   0 2px 2px hsl(0deg 0% 0% / 0.075),
   0 4px 4px hsl(0deg 0% 0% / 0.075),
@@ -24,24 +24,4 @@
   background-color: var(--background);
   color: var(--text);
   min-height: 100vh;
-}
-
-.eliteLogo {
-  height: 20vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .eliteLogo {
-    animation: elite-logo-spin infinite 20s linear;
-  }
-}
-
-@keyframes elite-logo-spin {
-  from {
-    transform: rotateY(0deg);
-  }
-  to {
-    transform: rotateY(360deg);
-  }
 }
