@@ -5,12 +5,7 @@
   justify-content: center;
   font-size: calc(6px + 2vmin);
   padding: 20px 0;
-  & h1 {
-    color: var(--hud-text);
-  }
-  & h4 {
-    color: var(--hud-text);
-  }
+  color: var(--hud-text);
 }
 
 .eliteLogo {
