@@ -1,0 +1,38 @@
+.colonyContainer {
+  margin: 0 auto;
+  width: 80vw;
+  min-height: 500px;
+  color: var(--hud-text);
+  background-color: var(--hud-background);
+  border-radius: 5px;
+  & h2 {
+    padding-top: 1rem ;
+  }
+}
+
+.resourcesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  & div {
+    border: 1px solid var(--hud-text);
+    & .resourceInput {
+      text-align: center;
+      color: var(--hud-text);
+      background-color: var(--hud-background);
+      border: none;
+      cursor: pointer;
+      &:hover {
+        color: var(--text);
+      }
+    }
+  }
+}
+
+.resourcesGridTitle {
+  font-weight: 900;
+  & div {
+    text-transform: uppercase;
+    padding: 10px 0;
+  }
+}
