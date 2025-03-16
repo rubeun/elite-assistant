@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
+import Colony from './Colony/Colony';
 
 const App = () => {
   const [isLightMode, setIsLightMode] = useState<boolean>(false);
@@ -8,6 +9,7 @@ const App = () => {
   return (
     <div className={`container ${isLightMode ? 'lightMode' : ''}`}>
       <Header />
+      <Colony />
     </div>
   );
 }
