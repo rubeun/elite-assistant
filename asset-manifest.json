@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/elite-assistant/static/css/main.851ca4c3.css",
+    "main.css": "/elite-assistant/static/css/main.48d63900.css",
     "main.js": "/elite-assistant/static/js/main.4399745f.js",
     "static/js/453.28d8ca20.chunk.js": "/elite-assistant/static/js/453.28d8ca20.chunk.js",
     "static/media/logo-elite1.svg": "/elite-assistant/static/media/logo-elite1.1dc578a5419d99cae7a3964aeee1f964.svg",
     "index.html": "/elite-assistant/index.html",
-    "main.851ca4c3.css.map": "/elite-assistant/static/css/main.851ca4c3.css.map",
+    "main.48d63900.css.map": "/elite-assistant/static/css/main.48d63900.css.map",
     "main.4399745f.js.map": "/elite-assistant/static/js/main.4399745f.js.map",
     "453.28d8ca20.chunk.js.map": "/elite-assistant/static/js/453.28d8ca20.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.851ca4c3.css",
+    "static/css/main.48d63900.css",
     "static/js/main.4399745f.js"
   ]
 }
