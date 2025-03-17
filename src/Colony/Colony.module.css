@@ -17,6 +17,7 @@
   & div {
     border: 1px solid var(--hud-text);
     & .resourceInput {
+      width: 100%;
       text-align: center;
       color: var(--hud-text);
       background-color: var(--hud-background);
@@ -41,6 +42,13 @@
   .colonyContainer {
     font-size: 0.6rem;
     width: 100vw;
+  }
+  .resourcesGrid {
+    & div {
+      & .resourceInput {
+        font-size: 0.6rem;
+      }
+    }
   }
 }
 
