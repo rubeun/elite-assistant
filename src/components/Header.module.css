@@ -11,7 +11,7 @@
 .eliteLogo {
   height: 20vmin;
   pointer-events: none;
-  padding-top: 3rem;
+  padding-top: 1rem;
 }
 
 @media (prefers-reduced-motion: no-preference) {
