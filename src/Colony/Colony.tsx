@@ -3,13 +3,41 @@ import styles from './Colony.module.css';
 
 import { OUTPOST_MILITARY, RESOURCE_NAMES } from '../data/colony'; // ### TEMP: Hardcoded
 
-type ResourceGridType = {
-  colonyTitle: string,
-  resourcesInfo: Record<string, string>[],
+type ResourceInfoType = {
+  name: string,
+  displayName: string,
+  requiredAmount: number,
+  currentAmount: number,
+  updateResourceAmount: any,
 }
 
 
-const ResourceGrid = ({ colonyTitle, resourcesInfo }: ResourceGridType) => {
+type ResourceGridType = {
+  colonyTitle: string,
+  resourcesInfo: Record<string, string>[],
+  updateResourceAmount: any,
+}
+
+const ResourceInfo = ({ name, displayName, requiredAmount, currentAmount, updateResourceAmount}: ResourceInfoType) => {
+  const [amount, setAmount] = useState(currentAmount);
+
+  const handleChange = (amount: number) => {
+    
+    setAmount(amount);
+    updateResourceAmount(name, amount);
+  }
+
+  return (
+    <div className={styles.resourcesGrid}>
+      <div>{displayName}</div>
+      <div>{requiredAmount}</div>
+      <div><input onChange={(e) => handleChange(parseInt(e.target.value))} className={styles.resourceInput} type='number' value={amount}></input></div>
+    </div>
+  );
+
+}
+
+const ResourceGrid = ({ colonyTitle, resourcesInfo, updateResourceAmount }: ResourceGridType) => {
 
   return (
     <div className={styles.resourceContainer}>
@@ -22,11 +50,19 @@ const ResourceGrid = ({ colonyTitle, resourcesInfo }: ResourceGridType) => {
 
       {resourcesInfo.length > 0 ? 
         resourcesInfo.map((resource: Record<string, string>, index: number) => (
-          <div key={`resource-${index}`} className={styles.resourcesGrid}>
-            <div>{resource.displayName}</div>
-            <div>{resource.requiredAmount}</div>
-            <div><input className={styles.resourceInput} type='number' value={resource.currentAmount}></input></div>
-          </div>
+          <ResourceInfo 
+            key={`resource-${index}`}
+            name={resource.name} 
+            displayName={resource.displayName} 
+            requiredAmount={parseInt(resource.requiredAmount)} 
+            currentAmount={parseInt(resource.currentAmount)}
+            updateResourceAmount={updateResourceAmount}
+          />
+          // <div key={`resource-${index}`} className={styles.resourcesGrid}>
+          //   <div>{resource.displayName}</div>
+          //   <div>{resource.requiredAmount}</div>
+          //   <div><input onChange={() => handleChange(resource.name, resource.currentAmount)} className={styles.resourceInput} type='number' value={resource.currentAmount}></input></div>
+          // </div>
           ))
         : null}
     </div>
@@ -57,10 +93,27 @@ const Colony = () => {
     setResourceInfo(tempResourcesInfo);    
   }
 
+  const updateResourceAmount = (resourceName: string, newAmount: number ) => {
+    let updatedResourcesArr:any = [...resourcesInfo];
+    if (updatedResourcesArr.length > 0) {
+      for (let x = 0; x < updatedResourcesArr.length; x++) {
+        if (updatedResourcesArr[x]['name'] === resourceName) {
+          updatedResourcesArr[x]['currentAmount'] = newAmount;
+          break;
+        }
+      }  
+    }
+    setResourceInfo(updatedResourcesArr);
+  }
+
   return (
     <div className={styles.colonyContainer}>
       <h2>Colony Manager</h2>
-      <ResourceGrid colonyTitle={colonyTitle} resourcesInfo={resourcesInfo} />
+      <ResourceGrid
+        colonyTitle={colonyTitle} 
+        resourcesInfo={resourcesInfo} 
+        updateResourceAmount={updateResourceAmount}
+      />
     </div>
   );
 }
