@@ -58,11 +58,6 @@ const ResourceGrid = ({ colonyTitle, resourcesInfo, updateResourceAmount }: Reso
             currentAmount={parseInt(resource.currentAmount)}
             updateResourceAmount={updateResourceAmount}
           />
-          // <div key={`resource-${index}`} className={styles.resourcesGrid}>
-          //   <div>{resource.displayName}</div>
-          //   <div>{resource.requiredAmount}</div>
-          //   <div><input onChange={() => handleChange(resource.name, resource.currentAmount)} className={styles.resourceInput} type='number' value={resource.currentAmount}></input></div>
-          // </div>
           ))
         : null}
     </div>
