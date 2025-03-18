@@ -21,6 +21,8 @@ type ResourceGridType = {
 const ResourceInfo = ({ name, displayName, requiredAmount, currentAmount, updateResourceAmount}: ResourceInfoType) => {
   const [amount, setAmount] = useState(currentAmount);
 
+  const remainingAmount = requiredAmount >= currentAmount ? requiredAmount - currentAmount : 0;
+
   const handleChange = (amount: number) => {
     
     setAmount(amount);
@@ -30,8 +32,8 @@ const ResourceInfo = ({ name, displayName, requiredAmount, currentAmount, update
   return (
     <div className={styles.resourcesGrid}>
       <div>{displayName}</div>
-      <div>{requiredAmount}</div>
-      <div><input onChange={(e) => handleChange(parseInt(e.target.value))} className={styles.resourceInput} type='number' value={amount}></input></div>
+      <div><input onChange={(e) => handleChange(parseInt(e.target.value))} className={styles.resourceInput} type='number' value={amount}></input> / {requiredAmount}</div>
+      <div>{remainingAmount}</div>
     </div>
   );
 
@@ -44,8 +46,8 @@ const ResourceGrid = ({ colonyTitle, resourcesInfo, updateResourceAmount }: Reso
       <h4>{colonyTitle}</h4>
       <div key={`resource-titles`} className={`${styles.resourcesGrid} ${styles.resourcesGridTitle}`}>
         <div>RESOURCES</div>
-        <div>REQUIRED AMOUNT</div>
-        <div>CURRENT AMOUNT</div>
+        <div>CURRENT / REQUIRED</div>
+        <div>REMAINING</div>
       </div>
 
       {resourcesInfo.length > 0 ? 
