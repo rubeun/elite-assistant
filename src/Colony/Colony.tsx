@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './Colony.module.css';
 
-import { OUTPOST_MILITARY, RESOURCE_NAMES } from '../data/colony'; // ### TEMP: Hardcoded
+import { COLONY_INFO, RESOURCE_NAMES } from '../data/colony'; // ### TEMP: Hardcoded
 
 type ResourceInfoType = {
   name: string,
@@ -67,8 +67,11 @@ const ResourceGrid = ({ colonyTitle, resourcesInfo, updateResourceAmount }: Reso
 }
 
 const Colony = () => {
-  const outpostResources = OUTPOST_MILITARY.materials; // #### TEMP
-  const colonyTitle = OUTPOST_MILITARY.displayName;
+  const [colonyType, setColonyType] = useState('');
+  // const colonyResources = COLONY_INFO['category']['outpost']['outpost-military'].materials; // #### TEMP
+  // const colonyTitle = COLONY_INFO['category']['outpost']['outpost-military'].displayName;
+  const colonyResources = COLONY_INFO['category']['settlement']['settlement-industrial-large'].materials; // #### TEMP
+  const colonyTitle = COLONY_INFO['category']['settlement']['settlement-industrial-large'].displayName;
   const [resourcesInfo, setResourceInfo] = useState([]);
 
   useEffect(() => {
@@ -77,7 +80,7 @@ const Colony = () => {
 
   const initialLoad = () => {
     let tempResourcesInfo: any = [];
-    for (let [key, value] of Object.entries(outpostResources)) {
+    for (let [key, value] of Object.entries(colonyResources)) {
       const displayName = RESOURCE_NAMES[key];
       let resourceItem = {
         name: key,
