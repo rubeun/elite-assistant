@@ -32,7 +32,14 @@ const ResourceInfo = ({ name, displayName, requiredAmount, currentAmount, update
   return (
     <div className={styles.resourcesGrid}>
       <div>{displayName}</div>
-      <div><input onChange={(e) => handleChange(parseInt(e.target.value))} className={styles.resourceInput} type='number' value={amount}></input> / {requiredAmount}</div>
+      <div>{requiredAmount}</div>
+      <div>
+        <input 
+              onChange={(e) => handleChange(parseInt(e.target.value))} 
+              className={styles.resourceInput} type='number' 
+              value={amount}>
+        </input>
+      </div>
       <div>{remainingAmount}</div>
     </div>
   );
@@ -46,7 +53,8 @@ const ResourceGrid = ({ colonyTitle, resourcesInfo, updateResourceAmount }: Reso
       <h4>{colonyTitle}</h4>
       <div key={`resource-titles`} className={`${styles.resourcesGrid} ${styles.resourcesGridTitle}`}>
         <div>RESOURCES</div>
-        <div>CURRENT / REQUIRED</div>
+        <div>REQUIRED</div>
+        <div>CURRENT</div>
         <div>REMAINING</div>
       </div>
 
