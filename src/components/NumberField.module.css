@@ -1,0 +1,29 @@
+.numfieldContainer {
+  & input {    
+    width: 100%;
+    text-align: center;
+    color: var(--hud-text);
+    border: none;
+    &::selection {
+      color: var(--text);
+    }
+    &:focus-visible {
+      outline: none;
+    }
+  }
+}
+
+.noRemaining {
+  & input {
+    color: var(--amount-reached);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .numfieldContainer {
+    & input {
+      width: 80%;
+      font-size: 0.6rem;
+    }
+  }
+}
