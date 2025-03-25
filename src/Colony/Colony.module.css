@@ -14,7 +14,10 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));;
   grid-template-rows: 1fr;
-  & div {
+  & > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 1px solid var(--hud-text);
     background-color: var(--background);
     padding: 5px 0;
@@ -28,6 +31,9 @@
         color: var(--text);
       }
     }
+    & .noRemaining {
+      color: var(--amount-reached);
+    }     
   }
 }
 
@@ -38,6 +44,11 @@
     padding: 10px 0;
   }
 }
+
+.noRemaining {
+  color: var(--amount-reached);
+} 
+
 
 @media only screen and (max-width: 600px) {
   .colonyContainer {
