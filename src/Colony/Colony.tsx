@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './Colony.module.css';
 
 import { COLONY_INFO, RESOURCE_NAMES } from '../data/colony'; // ### TEMP: Hardcoded
+import NumberField from '../components/NumberField';
 
 type ResourceInfoType = {
   name: string,
@@ -10,7 +11,6 @@ type ResourceInfoType = {
   currentAmount: number,
   updateResourceAmount: any,
 }
-
 
 type ResourceGridType = {
   colonyTitle: string,
@@ -22,25 +22,21 @@ const ResourceInfo = ({ name, displayName, requiredAmount, currentAmount, update
   const [amount, setAmount] = useState(currentAmount);
 
   const remainingAmount = requiredAmount >= currentAmount ? requiredAmount - currentAmount : 0;
+  const amountReached =  remainingAmount < 1 ? true : false;
 
-  const handleChange = (amount: number) => {
-    
+  const updateAmount = (amount: number) => {
     setAmount(amount);
     updateResourceAmount(name, amount);
   }
 
   return (
     <div className={styles.resourcesGrid}>
-      <div>{displayName}</div>
-      <div>{requiredAmount}</div>
+      <div className={`${amountReached ? styles.noRemaining : ''}`}>{displayName} {amountReached ? '✓' : ''}</div>
+      <div className={`${amountReached ? styles.noRemaining : ''}`}>{requiredAmount}</div>
+      <div className={`${amountReached ? styles.noRemaining : ''}`}>{remainingAmount}</div>
       <div>
-        <input 
-              onChange={(e) => handleChange(parseInt(e.target.value))} 
-              className={styles.resourceInput} type='number' 
-              value={amount}>
-        </input>
+        <NumberField numValue={amount} amountReached={amountReached} updateAmount={updateAmount} />
       </div>
-      <div>{remainingAmount}</div>
     </div>
   );
 
@@ -54,8 +50,8 @@ const ResourceGrid = ({ colonyTitle, resourcesInfo, updateResourceAmount }: Reso
       <div key={`resource-titles`} className={`${styles.resourcesGrid} ${styles.resourcesGridTitle}`}>
         <div>RESOURCES</div>
         <div>REQUIRED</div>
-        <div>CURRENT</div>
         <div>REMAINING</div>
+        <div>CURRENT</div>
       </div>
 
       {resourcesInfo.length > 0 ? 
@@ -75,7 +71,7 @@ const ResourceGrid = ({ colonyTitle, resourcesInfo, updateResourceAmount }: Reso
 }
 
 const Colony = () => {
-  const [colonyType, setColonyType] = useState('');
+  // const [colonyType, setColonyType] = useState('');
   // const colonyResources = COLONY_INFO['category']['outpost']['outpost-military'].materials; // #### TEMP
   // const colonyTitle = COLONY_INFO['category']['outpost']['outpost-military'].displayName;
   const colonyResources = COLONY_INFO['category']['settlement']['settlement-industrial-large'].materials; // #### TEMP
@@ -83,23 +79,23 @@ const Colony = () => {
   const [resourcesInfo, setResourceInfo] = useState([]);
 
   useEffect(() => {
-    initialLoad();
-  },[])
-
-  const initialLoad = () => {
-    let tempResourcesInfo: any = [];
-    for (let [key, value] of Object.entries(colonyResources)) {
-      const displayName = RESOURCE_NAMES[key];
-      let resourceItem = {
-        name: key,
-        displayName: displayName,
-        requiredAmount: value,
-        currentAmount: 0,
+    const initialLoad = () => {
+      let tempResourcesInfo: any = [];
+      for (let [key, value] of Object.entries(colonyResources)) {
+        const displayName = RESOURCE_NAMES[key];
+        let resourceItem = {
+          name: key,
+          displayName: displayName,
+          requiredAmount: value,
+          currentAmount: 0,
+        }
+        tempResourcesInfo.push(resourceItem); 
       }
-      tempResourcesInfo.push(resourceItem); 
-    }
-    setResourceInfo(tempResourcesInfo);    
-  }
+      setResourceInfo(tempResourcesInfo);    
+    }  
+    initialLoad();
+  },[colonyResources])
+
 
   const updateResourceAmount = (resourceName: string, newAmount: number ) => {
     let updatedResourcesArr:any = [...resourcesInfo];
