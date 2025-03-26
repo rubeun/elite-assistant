@@ -1,0 +1,54 @@
+
+.resourcesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));;
+  grid-template-rows: 1fr;
+  & > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--hud-text);
+    background-color: var(--background);
+    padding: 5px 0;
+    & .resourceInput {
+      width: 100px;
+      text-align: center;
+      color: var(--hud-text);
+      border: none;
+      cursor: pointer;
+      &:hover {
+        color: var(--text);
+      }
+    }
+    & .noRemaining {
+      color: var(--amount-reached);
+    }     
+  }
+}
+
+.resourcesGridTitle {
+  font-weight: 900;
+  & div {
+    text-transform: uppercase;
+    padding: 10px 0;
+  }
+}
+
+.noRemaining {
+  color: var(--amount-reached);
+} 
+
+
+@media only screen and (max-width: 600px) {
+  .colonyContainer {
+    font-size: 0.6rem;
+    width: 100vw;
+  }
+  .resourcesGrid {
+    & div {
+      & .resourceInput {
+        font-size: 0.6rem;
+      }
+    }
+  }
+}
