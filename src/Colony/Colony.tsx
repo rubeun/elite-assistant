@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import styles from './Colony.module.css';
 
 import { COLONY_INFO, RESOURCE_NAMES } from '../data/colony'; // ### TEMP: Hardcoded
-import NumberField from '../components/NumberField';
+import ResourceGrid from './ResourceGrid';
 
 type ResourceInfoType = {
   name: string,
@@ -12,89 +12,48 @@ type ResourceInfoType = {
   updateResourceAmount: any,
 }
 
-type ResourceGridType = {
-  colonyTitle: string,
-  resourcesInfo: Record<string, string>[],
-  updateResourceAmount: any,
-}
-
-const ResourceInfo = ({ name, displayName, requiredAmount, currentAmount, updateResourceAmount}: ResourceInfoType) => {
-  const [amount, setAmount] = useState(currentAmount);
-
-  const remainingAmount = requiredAmount >= currentAmount ? requiredAmount - currentAmount : 0;
-  const amountReached =  remainingAmount < 1 ? true : false;
-
-  const updateAmount = (amount: number) => {
-    setAmount(amount);
-    updateResourceAmount(name, amount);
-  }
-
-  return (
-    <div className={styles.resourcesGrid}>
-      <div className={`${amountReached ? styles.noRemaining : ''}`}>{displayName} {amountReached ? '✓' : ''}</div>
-      <div className={`${amountReached ? styles.noRemaining : ''}`}>{requiredAmount}</div>
-      <div className={`${amountReached ? styles.noRemaining : ''}`}>{remainingAmount}</div>
-      <div>
-        <NumberField numValue={amount} amountReached={amountReached} updateAmount={updateAmount} />
-      </div>
-    </div>
-  );
-
-}
-
-const ResourceGrid = ({ colonyTitle, resourcesInfo, updateResourceAmount }: ResourceGridType) => {
-
-  return (
-    <div className={styles.resourceContainer}>
-      <h4>{colonyTitle}</h4>
-      <div key={`resource-titles`} className={`${styles.resourcesGrid} ${styles.resourcesGridTitle}`}>
-        <div>RESOURCES</div>
-        <div>REQUIRED</div>
-        <div>REMAINING</div>
-        <div>CURRENT</div>
-      </div>
-
-      {resourcesInfo.length > 0 ? 
-        resourcesInfo.map((resource: Record<string, string>, index: number) => (
-          <ResourceInfo 
-            key={`resource-${index}`}
-            name={resource.name} 
-            displayName={resource.displayName} 
-            requiredAmount={parseInt(resource.requiredAmount)} 
-            currentAmount={parseInt(resource.currentAmount)}
-            updateResourceAmount={updateResourceAmount}
-          />
-          ))
-        : null}
-    </div>
-  );
-}
-
 const Colony = () => {
-  // const [colonyType, setColonyType] = useState('');
-  // const colonyResources = COLONY_INFO['category']['outpost']['outpost-military'].materials; // #### TEMP
-  // const colonyTitle = COLONY_INFO['category']['outpost']['outpost-military'].displayName;
-  const colonyResources = COLONY_INFO['category']['settlement']['settlement-industrial-large'].materials; // #### TEMP
-  const colonyTitle = COLONY_INFO['category']['settlement']['settlement-industrial-large'].displayName;
-  const [resourcesInfo, setResourceInfo] = useState([]);
+  const colonyInfoFile: any = useMemo(() => COLONY_INFO, []); 
+  const resourceNamesFile = useMemo(() => RESOURCE_NAMES, []);
+
+  const [loading, setLoading] = useState<boolean>(true);
+  const [colonyTitle, setColonyTitle] = useState<string>("");
+  const [colonyType, setColonyType] = useState<string>('settlement');
+  const [colonySubType, setColonySubType] = useState<string>('settlement-industrial-large');
+  const [resourcesInfo, setResourceInfo] = useState<ResourceInfoType[]>([]);
+
 
   useEffect(() => {
-    const initialLoad = () => {
-      let tempResourcesInfo: any = [];
-      for (let [key, value] of Object.entries(colonyResources)) {
-        const displayName = RESOURCE_NAMES[key];
-        let resourceItem = {
-          name: key,
-          displayName: displayName,
-          requiredAmount: value,
-          currentAmount: 0,
+    const loadData = () => { 
+      try {
+        if (colonyType && colonySubType) {
+          const colonyInfo = colonyInfoFile["category"][colonyType][colonySubType];
+          if (!colonyInfo) throw new Error("colonyInfo didn't load");
+
+          setColonyTitle(colonyInfo.displayName);
+          let colonyResources = colonyInfo.materials;
+          let tempResourcesInfo: any = [];
+          for (let [key, value] of Object.entries(colonyResources)) {
+            const displayName = resourceNamesFile[key];
+            let resourceItem = {
+              name: key,
+              displayName: displayName,
+              requiredAmount: value,
+              currentAmount: 0,
+            }
+            tempResourcesInfo.push(resourceItem); 
+          }
+          setResourceInfo(tempResourcesInfo);        
         }
-        tempResourcesInfo.push(resourceItem); 
+
+      } catch (err) {
+        console.log("Load Error: ", err);
+      } finally {
+        setLoading(false);
       }
-      setResourceInfo(tempResourcesInfo);    
     }  
-    initialLoad();
-  },[colonyResources])
+    loadData();
+  },[colonyType, colonySubType, colonyInfoFile, resourceNamesFile])
 
 
   const updateResourceAmount = (resourceName: string, newAmount: number ) => {
@@ -113,11 +72,13 @@ const Colony = () => {
   return (
     <div className={styles.colonyContainer}>
       <h2>Colony Manager</h2>
-      <ResourceGrid
-        colonyTitle={colonyTitle} 
-        resourcesInfo={resourcesInfo} 
-        updateResourceAmount={updateResourceAmount}
-      />
+      {loading ? <h3>Loading...</h3> : (
+        <ResourceGrid
+          colonyTitle={colonyTitle} 
+          resourcesInfo={resourcesInfo} 
+          updateResourceAmount={updateResourceAmount}
+        />
+      )}
     </div>
   );
 }
