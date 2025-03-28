@@ -10,7 +10,6 @@ type ResourceInfoType = {
   displayName: string,
   requiredAmount: number,
   currentAmount: number,
-  updateResourceAmount: any,
 }
 
 const Colony = () => {
@@ -71,8 +70,9 @@ const Colony = () => {
   }
 
   const selectColonyTypes = (colonyType: string, colonySubType: string) => {
+    setResourceInfo([]);
     setColonyType(colonyType);
-    setColonySubType(colonySubType)
+    setColonySubType(colonySubType);
   }
 
   return (
