@@ -3,6 +3,7 @@ import styles from './Colony.module.css';
 
 import { COLONY_INFO, RESOURCE_NAMES } from '../data/colony'; // ### TEMP: Hardcoded
 import ResourceGrid from './ResourceGrid';
+import DropDown from '../components/DropDown';
 
 type ResourceInfoType = {
   name: string,
@@ -69,9 +70,19 @@ const Colony = () => {
     setResourceInfo(updatedResourcesArr);
   }
 
+  const selectColonyTypes = (colonyType: string, colonySubType: string) => {
+    setColonyType(colonyType);
+    setColonySubType(colonySubType)
+  }
+
   return (
     <div className={styles.colonyContainer}>
       <h2>Colony Manager</h2>
+      <DropDown 
+        selected={colonySubType} 
+        options={[]} 
+        selectOption={selectColonyTypes} 
+      />
       {loading ? <h3>Loading...</h3> : (
         <ResourceGrid
           colonyTitle={colonyTitle} 
