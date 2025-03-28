@@ -40,7 +40,6 @@ const DropDown = ({ selected, options, selectOption }: DropDownType) => {
     selectOption(colonyNavFile[value]["category"], value);
     setIsDropDownOpen(false);
   }
-  console.log("File: ", colonyNavFile);
 
   return (
     <div className={styles.dropdownContainer}>
@@ -53,7 +52,8 @@ const DropDown = ({ selected, options, selectOption }: DropDownType) => {
       {isDropDownOpen && (
         <ul className={styles.dropdownOptions}>
           {dropdownOptions.length > 0 && dropdownOptions.map((option, idx) => 
-            <DropDownOption 
+            <DropDownOption
+              key={`dropdown-${idx}`}
               optionName={colonyNavFile[option]["displayName"]} 
               optionKey={option} 
               handleSelection={handleSelection} />)}
