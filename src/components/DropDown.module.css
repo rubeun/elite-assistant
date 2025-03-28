@@ -1,0 +1,27 @@
+.dropdownContainer {
+  & .dropdownButton {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    color: var(--hud-text);
+    background-color: var(--hud-background);
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+  & .dropdownOptions {
+    & li {
+      list-style: none;
+      & button {
+        color: var(--hud-text);
+        background-color: var(--hud-background);
+        cursor: pointer;
+        &:hover {
+          color: var(--hud-background);
+          background-color: var(--hud-text);
+        }
+      }
+    }
+  }
+}
