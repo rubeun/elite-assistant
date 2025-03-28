@@ -1,4 +1,40 @@
 
+export const COLONY_NAV = {
+  // "outpost-civilian": { 
+  //   "displayName": "Civilian Outpost",
+  //   "category": "outpost", 
+  // },
+  // "outpost-commercial": { 
+  //   "displayName": "Commercial Outpost",
+  //   "category": "outpost", 
+  // },
+  // "outpost-scientific": { 
+  //   "displayName": "Scientific Outpost",
+  //   "category": "outpost", 
+  // },
+  // "outpost-mining": { 
+  //   "displayName": "Mining Outpost",
+  //   "category": "outpost", 
+  // },
+  // "outpost-industrial": { 
+  //   "displayName": "Industrial Outpost",
+  //   "category": "outpost", 
+  // },
+  "outpost-military": { 
+    "displayName": "Military Outpost",
+    "category": "outpost", 
+  },
+  // "outpost-unsanctioned": { 
+  //   "displayName": "Unsanctioned Outpost",
+  //   "category": "outpost", 
+  // },
+
+  "settlement-industrial-large": {
+    "displayName": "Large Industrial Settlement",
+    "category": "settlement", 
+  },
+}
+
 
 export const COLONY_INFO = {
   "name": "colony",
