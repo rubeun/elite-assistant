@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/elite-assistant/static/css/main.a2049ff1.css",
-    "main.js": "/elite-assistant/static/js/main.a9a8065e.js",
+    "main.css": "/elite-assistant/static/css/main.f3128710.css",
+    "main.js": "/elite-assistant/static/js/main.cffdc630.js",
     "static/js/453.28d8ca20.chunk.js": "/elite-assistant/static/js/453.28d8ca20.chunk.js",
     "static/media/logo-elite1.svg": "/elite-assistant/static/media/logo-elite1.1dc578a5419d99cae7a3964aeee1f964.svg",
     "index.html": "/elite-assistant/index.html",
-    "main.a2049ff1.css.map": "/elite-assistant/static/css/main.a2049ff1.css.map",
-    "main.a9a8065e.js.map": "/elite-assistant/static/js/main.a9a8065e.js.map",
+    "main.f3128710.css.map": "/elite-assistant/static/css/main.f3128710.css.map",
+    "main.cffdc630.js.map": "/elite-assistant/static/js/main.cffdc630.js.map",
     "453.28d8ca20.chunk.js.map": "/elite-assistant/static/js/453.28d8ca20.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a2049ff1.css",
-    "static/js/main.a9a8065e.js"
+    "static/css/main.f3128710.css",
+    "static/js/main.cffdc630.js"
   ]
 }
