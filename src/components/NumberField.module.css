@@ -4,6 +4,10 @@
     text-align: center;
     color: var(--hud-text);
     border: none;
+    &:hover {
+      color: var(--text);
+      cursor: pointer;
+    }
     &::selection {
       color: var(--text);
     }
