@@ -1,27 +1,44 @@
 .dropdownContainer {
-  & .dropdownButton {
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    color: var(--hud-text);
-    background-color: var(--hud-background);
-    &:hover {
-      opacity: 0.6;
-    }
-  }
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   & .dropdownOptions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0;
+    background-color: var(--hud-background);
+    border: 1px solid var(--hud-text);
+    & .dropdownActive {
+      color: var(--dropdown-active);
+      cursor: unset;
+      &:hover {
+        color: var(--dropdown-active);
+        background-color: unset;
+      }
+    }
     & li {
       list-style: none;
-      & button {
-        color: var(--hud-text);
-        background-color: var(--hud-background);
-        cursor: pointer;
-        &:hover {
-          color: var(--hud-background);
-          background-color: var(--hud-text);
-        }
-      }
+      cursor: pointer;
+      padding: 2px 10px;
+      &:hover {
+        color: var(--hud-background);
+        background-color: var(--hud-text);
+      }      
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .dropdownContainer {
+    position: relative;
+    & .dropdownOptions {
+      font-size: 1rem;
     }
   }
 }
