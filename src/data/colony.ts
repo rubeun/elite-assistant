@@ -1,17 +1,17 @@
 
 export const COLONY_NAV = {
-  // "outpost-civilian": { 
-  //   "displayName": "Civilian Outpost",
-  //   "category": "outpost", 
-  // },
-  // "outpost-commercial": { 
-  //   "displayName": "Commercial Outpost",
-  //   "category": "outpost", 
-  // },
-  // "outpost-scientific": { 
-  //   "displayName": "Scientific Outpost",
-  //   "category": "outpost", 
-  // },
+  "outpost-civilian": { 
+    "displayName": "Civilian Outpost",
+    "category": "outpost", 
+  },
+  "outpost-commercial": { 
+    "displayName": "Commercial Outpost",
+    "category": "outpost", 
+  },
+  "outpost-scientific": { 
+    "displayName": "Scientific Outpost",
+    "category": "outpost", 
+  },
   // "outpost-mining": { 
   //   "displayName": "Mining Outpost",
   //   "category": "outpost", 
@@ -40,6 +40,83 @@ export const COLONY_INFO = {
   "name": "colony",
   "category": {
     "outpost": {
+      "outpost-civilian": {
+        "name": "outpost-civilian",
+        "displayName": "Civilian Outpost",
+        "category": "outpost",
+        "materials": {
+          "ceramic-composites": 497,
+          "cmm-composites": 3912,
+          "computer-components": 50,
+          "copper": 218,
+          "food-cartridges": 94,
+          "fruit-and-vegetables": 50,
+          "insulating-membranes": 311,
+          "liquid-oxygen": 1553,
+          "medical-diagnostic-equipment": 13,
+          "non-lethal-weapons": 13,
+          "polymers": 497,
+          "power-generators": 19,
+          "semiconductors": 56,
+          "steel": 5588,
+          "superconductors": 100,
+          "titanium": 4843,
+          "water": 621,
+          "water-purifiers": 38, 
+        }      
+      },
+      "outpost-commercial": {
+        "name": "outpost-commercial",
+        "displayName": "Commercial Outpost",
+        "category": "outpost",
+        "materials": {
+          "aluminium": 513,
+          "ceramic-composites": 504,
+          "cmm-composites": 4539,
+          "computer-components": 50,
+          "copper": 234,
+          "food-cartridges": 94,
+          "fruit-and-vegetables": 50,
+          "insulating-membranes": 357,
+          "liquid-oxygen": 1721,
+          "medical-diagnostic-equipment": 13,
+          "non-lethal-weapons": 13,
+          "polymers": 545,
+          "power-generators": 20,
+          "semiconductors": 65,
+          "steel": 6936,
+          "superconductors": 107,
+          "titanium": 5579,
+          "water": 706,
+          "water-purifiers": 39, 
+        }      
+      }, 
+      "outpost-scientific": {
+        "name": "outpost-scientific",
+        "displayName": "Scientific Outpost",
+        "category": "outpost",
+        "materials": {
+          "aluminium": 477,
+          "ceramic-composites": 500,
+          "cmm-composites": 4584,
+          "computer-components": 65,
+          "copper": 240,
+          "food-cartridges": 92,
+          "fruit-and-vegetables": 51,
+          "insulating-membranes": 345,
+          "liquid-oxygen": 1759,
+          "medical-diagnostic-equipment": 13,
+          "non-lethal-weapons": 12,
+          "polymers": 498,
+          "power-generators": 18,
+          "semiconductors": 70,
+          "steel": 6473,
+          "superconductors": 109,
+          "titanium": 5603,
+          "water": 769,
+          "water-purifiers": 37, 
+        }      
+      },      
       "outpost-military": {
         "name": "outpost-military",
         "displayName": "Military Outpost",
@@ -65,7 +142,7 @@ export const COLONY_INFO = {
           "water": 729,
           "water-purifiers": 36, 
         }      
-      }
+      },      
     },
     "settlement": {
       "settlement-industrial-large": {
