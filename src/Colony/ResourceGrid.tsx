@@ -1,7 +1,5 @@
-import { useState } from 'react';
 import styles from './ResourceGrid.module.css';
 import NumberField from '../components/NumberField';
-
 
 type ResourceInfoType = {
   name: string,
@@ -14,17 +12,15 @@ type ResourceInfoType = {
 type ResourceGridType = {
   colonyTitle: string,
   resourcesInfo: any,
+  userResources: any,
   updateResourceAmount: any,
 }
 
 const ResourceInfo = ({ name, displayName, requiredAmount, currentAmount, updateResourceAmount}: ResourceInfoType) => {
-  const [amount, setAmount] = useState(currentAmount);
-
   const remainingAmount = requiredAmount >= currentAmount ? requiredAmount - currentAmount : 0;
   const amountReached =  remainingAmount < 1 ? true : false;
 
   const updateAmount = (amount: number) => {
-    setAmount(amount);
     updateResourceAmount(name, amount);
   }
 
@@ -34,14 +30,14 @@ const ResourceInfo = ({ name, displayName, requiredAmount, currentAmount, update
       <div className={`${amountReached ? styles.noRemaining : ''}`}>{requiredAmount}</div>
       <div className={`${amountReached ? styles.noRemaining : ''}`}>{remainingAmount}</div>
       <div>
-        <NumberField numValue={amount} amountReached={amountReached} updateAmount={updateAmount} />
+        <NumberField numValue={currentAmount} amountReached={amountReached} updateAmount={updateAmount} />
       </div>
     </div>
   );
 
 }
 
-const ResourceGrid = ({ colonyTitle, resourcesInfo, updateResourceAmount }: ResourceGridType) => {
+const ResourceGrid = ({ colonyTitle, resourcesInfo, userResources, updateResourceAmount }: ResourceGridType) => {
 
   return (
     <div className={styles.resourceContainer}>
@@ -60,7 +56,7 @@ const ResourceGrid = ({ colonyTitle, resourcesInfo, updateResourceAmount }: Reso
             name={resource.name} 
             displayName={resource.displayName} 
             requiredAmount={parseInt(resource.requiredAmount)} 
-            currentAmount={parseInt(resource.currentAmount)}
+            currentAmount={userResources[resource.name] ? userResources[resource.name] : 0}
             updateResourceAmount={updateResourceAmount}
           />
           ))
