@@ -18,8 +18,8 @@ const Colony = () => {
 
   const [loading, setLoading] = useState<boolean>(true);
   const [colonyTitle, setColonyTitle] = useState<string>("");
-  const [colonyType, setColonyType] = useState<string>('settlement');
-  const [colonySubType, setColonySubType] = useState<string>('settlement-industrial-large');
+  const [colonyType, setColonyType] = useState<string>("");
+  const [colonySubType, setColonySubType] = useState<string>("");
   const [resourcesInfo, setResourceInfo] = useState<ResourceInfoType[]>([]);
   const [userResources, setUserResources] = useState(() => {
     const storedData = localStorage.getItem('elite-assistant');
@@ -96,21 +96,25 @@ const Colony = () => {
   return (
     <div className={styles.colonyContainer}>
       <h2>Colony Manager</h2>
-      <DropDown 
+      <DropDown
         selected={colonySubType} 
-        options={[]} 
         selectOption={selectColonyTypes} 
       />
-      {loading ? <h3>Loading...</h3> : (
-        <ResourceGrid
-          colonyTitle={colonyTitle} 
-          resourcesInfo={resourcesInfo}
-          userResources={userResources} 
-          updateResourceAmount={updateResourceAmount}
-        />
-      )}
-      <button onClick={resetUserResources}>Clear User Resources</button>
-      <button onClick={createUserOutpost}>User Created The Outpost</button>
+      {loading ? 
+        <h3>Loading...</h3> :
+        colonyType === "" ? <h4>Select A Colony Type From The Menu</h4> :
+        (
+          <>
+            <ResourceGrid
+              colonyTitle={colonyTitle} 
+              resourcesInfo={resourcesInfo}
+              userResources={userResources} 
+              updateResourceAmount={updateResourceAmount}
+            />
+          <button onClick={resetUserResources}>Clear User Resources</button>
+          <button onClick={createUserOutpost}>User Created This Outpost</button>
+          </>
+        )}
     </div>
   );
 }
