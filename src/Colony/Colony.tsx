@@ -21,6 +21,10 @@ const Colony = () => {
   const [colonyType, setColonyType] = useState<string>('settlement');
   const [colonySubType, setColonySubType] = useState<string>('settlement-industrial-large');
   const [resourcesInfo, setResourceInfo] = useState<ResourceInfoType[]>([]);
+  const [userResources, setUserResources] = useState(() => {
+    const storedData = localStorage.getItem('elite-assistant');
+    return storedData ? JSON.parse(storedData) : {};  // check if browser localStorage has data to load
+  });
 
 
   useEffect(() => {
@@ -39,11 +43,12 @@ const Colony = () => {
               name: key,
               displayName: displayName,
               requiredAmount: value,
-              currentAmount: 0,
             }
             tempResourcesInfo.push(resourceItem); 
           }
-          setResourceInfo(tempResourcesInfo);        
+          setResourceInfo(tempResourcesInfo);
+        } else {
+          return null;
         }
 
       } catch (err) {
@@ -53,20 +58,33 @@ const Colony = () => {
       }
     }  
     loadData();
-  },[colonyType, colonySubType, colonyInfoFile, resourceNamesFile])
+  },[colonyType, colonySubType, colonyInfoFile, resourceNamesFile, userResources])
 
 
   const updateResourceAmount = (resourceName: string, newAmount: number ) => {
-    let updatedResourcesArr:any = [...resourcesInfo];
-    if (updatedResourcesArr.length > 0) {
-      for (let x = 0; x < updatedResourcesArr.length; x++) {
-        if (updatedResourcesArr[x]['name'] === resourceName) {
-          updatedResourcesArr[x]['currentAmount'] = newAmount;
-          break;
-        }
-      }  
+    let updatedResources:any = {...userResources};
+
+    updatedResources[resourceName] = newAmount;
+    setUserResources(updatedResources)
+    localStorage.setItem('elite-assistant', JSON.stringify(updatedResources)); // store in localStorage of browser
+  }
+
+  const resetUserResources = () => {
+    setUserResources({});
+    localStorage.removeItem('elite-assistant'); // clear localStorage
+  }
+
+  const createUserOutpost = () => {
+    let updatedUserResources = {...userResources};
+    for (let i = 0; i < resourcesInfo.length; i++) {
+      if (updatedUserResources.hasOwnProperty(resourcesInfo[i]['name'])) {
+        const tempCalculation = updatedUserResources[resourcesInfo[i]['name']] - resourcesInfo[i]['requiredAmount'];
+        updatedUserResources[resourcesInfo[i]['name']] = tempCalculation < 0 ? 0 : tempCalculation;
+      }
     }
-    setResourceInfo(updatedResourcesArr);
+    localStorage.removeItem('elite-assistant'); // clear localStorage
+    localStorage.setItem('elite-assistant', JSON.stringify(updatedUserResources)); // store in localStorage of browser
+    setUserResources(updatedUserResources);
   }
 
   const selectColonyTypes = (colonyType: string, colonySubType: string) => {
@@ -86,10 +104,13 @@ const Colony = () => {
       {loading ? <h3>Loading...</h3> : (
         <ResourceGrid
           colonyTitle={colonyTitle} 
-          resourcesInfo={resourcesInfo} 
+          resourcesInfo={resourcesInfo}
+          userResources={userResources} 
           updateResourceAmount={updateResourceAmount}
         />
       )}
+      <button onClick={resetUserResources}>Clear User Resources</button>
+      <button onClick={createUserOutpost}>User Created The Outpost</button>
     </div>
   );
 }
