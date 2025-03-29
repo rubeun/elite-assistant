@@ -3,6 +3,7 @@ import styles from './DropDown.module.css';
 import { COLONY_NAV } from '../data/colony';
 
 type DropDownOptionType = {
+  optionSelected: string,
   optionName: string,
   optionKey: string,
   handleSelection: any,
@@ -10,26 +11,25 @@ type DropDownOptionType = {
 
 type DropDownType = {
   selected: string,
-  options: string[],  // e.g. ["outpost", "outpost-military"] or ['settlement', 'settlement-industrial-large']
   selectOption: any,
 }
 
-const DropDownOption = ({ optionName, optionKey, handleSelection }: DropDownOptionType) => {
-  return (
-    <li><button onClick={() => handleSelection(optionKey)}>{optionName}</button></li>
-  );
-
+const DropDownOption = ({ optionSelected, optionName, optionKey, handleSelection }: DropDownOptionType) => {
+  if (optionKey === optionSelected) {
+    return <li className={styles.dropdownActive}>* {optionName} *</li>
+  } else {
+    return <li onClick={() => handleSelection(optionKey)}>{optionName}</li>
+  }
 }
 
 
-const DropDown = ({ selected, options, selectOption }: DropDownType) => {
+const DropDown = ({ selected, selectOption }: DropDownType) => {
   const colonyNavFile: any = useMemo(() => COLONY_NAV, []); 
   
   const [isDropDownOpen, setIsDropDownOpen] = useState<boolean>(false);
   const [optionSelected, setOptionSelected] = useState<string>(selected);
 
   const dropdownOptions = Object.keys(COLONY_NAV);
-  const buttonName = colonyNavFile[optionSelected]["displayName"];
 
   const toggleDropDown = () => {
     setIsDropDownOpen(!isDropDownOpen);
@@ -47,13 +47,14 @@ const DropDown = ({ selected, options, selectOption }: DropDownType) => {
         className={styles.dropdownButton}
         onClick={toggleDropDown} 
         value={optionSelected}
-      >{buttonName}</button>
+      >Choose Colony Type</button>
 
       {isDropDownOpen && (
         <ul className={styles.dropdownOptions}>
           {dropdownOptions.length > 0 && dropdownOptions.map((option, idx) => 
             <DropDownOption
               key={`dropdown-${idx}`}
+              optionSelected={optionSelected}
               optionName={colonyNavFile[option]["displayName"]} 
               optionKey={option} 
               handleSelection={handleSelection} />)}
