@@ -191,7 +191,7 @@ export const RESOURCE_NAMES: Record<string, string> = {
   "computer-components": "Computer Components",
   "copper": "Copper",
   "emergency-power-cells": "Emergency Power Cells",
-  "evacuation-shelter": "Evacuatin Shelter",
+  "evacuation-shelter": "Evacuation Shelter",
   "food-cartridges": "Food Cartridges",
   "fruit-and-vegetables": "Fruit and Vegetables",
   "he-suits": "H.E. Suits",
