@@ -4,6 +4,7 @@ import styles from './Colony.module.css';
 import { COLONY_INFO, RESOURCE_NAMES } from '../data/colony'; // ### TEMP: Hardcoded
 import ResourceGrid from './ResourceGrid';
 import DropDown from '../components/DropDown';
+import ColonyIcon from './ColonyIcon';
 
 type ResourceInfoType = {
   name: string,
@@ -95,16 +96,19 @@ const Colony = () => {
 
   return (
     <div className={styles.colonyContainer}>
-      <h2>Colony Manager</h2>
-      <DropDown
-        selected={colonySubType} 
-        selectOption={selectColonyTypes} 
-      />
+      <h2>System Colonisation Manager</h2>
+      <div className={styles.menuContainer}>
+        <DropDown
+          selected={colonySubType} 
+          selectOption={selectColonyTypes} 
+        />
+      </div>
       {loading ? 
         <h3>Loading...</h3> :
         colonyType === "" ? <h4>Select A Colony Type From The Menu</h4> :
         (
           <>
+            <ColonyIcon colonyType={colonyType} />
             <ResourceGrid
               colonyTitle={colonyTitle} 
               resourcesInfo={resourcesInfo}
