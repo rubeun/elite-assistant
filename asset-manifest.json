@@ -1,16 +1,19 @@
 {
   "files": {
-    "main.css": "/elite-assistant/static/css/main.c21c211f.css",
-    "main.js": "/elite-assistant/static/js/main.9225127c.js",
+    "main.css": "/elite-assistant/static/css/main.e90e233d.css",
+    "main.js": "/elite-assistant/static/js/main.cceef9ea.js",
     "static/js/453.28d8ca20.chunk.js": "/elite-assistant/static/js/453.28d8ca20.chunk.js",
+    "static/media/icon-outpost2.svg": "/elite-assistant/static/media/icon-outpost2.f45f20abf4f25630ff6f6354da93a618.svg",
     "static/media/logo-elite1.svg": "/elite-assistant/static/media/logo-elite1.1dc578a5419d99cae7a3964aeee1f964.svg",
+    "static/media/icon-settlement4.svg": "/elite-assistant/static/media/icon-settlement4.deb517a531c399005641d8a70a469f50.svg",
+    "static/media/icon-station-coriolis.svg": "/elite-assistant/static/media/icon-station-coriolis.abefb94e27b4c1a0958e6d63e82c6797.svg",
     "index.html": "/elite-assistant/index.html",
-    "main.c21c211f.css.map": "/elite-assistant/static/css/main.c21c211f.css.map",
-    "main.9225127c.js.map": "/elite-assistant/static/js/main.9225127c.js.map",
+    "main.e90e233d.css.map": "/elite-assistant/static/css/main.e90e233d.css.map",
+    "main.cceef9ea.js.map": "/elite-assistant/static/js/main.cceef9ea.js.map",
     "453.28d8ca20.chunk.js.map": "/elite-assistant/static/js/453.28d8ca20.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c21c211f.css",
-    "static/js/main.9225127c.js"
+    "static/css/main.e90e233d.css",
+    "static/js/main.cceef9ea.js"
   ]
 }
